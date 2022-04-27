@@ -19,7 +19,7 @@ const buildChatRecomendationBlocks = (userName) => [
     type: 'section',
     text: {
       type: 'mrkdwn',
-      text: `Te proponemos que inicies una conversación con <example.com|@${userName}> (Transformación Digital). Te damos un dato: Selva es fanática de AC/DC :guitar: y le gustan los gatos :cat:`,
+      text: `Te proponemos que inicies una conversación con <example.com|@${userName}> (Transformación Digital). Te damos un dato:a ${userName} le gusta de AC/DC :guitar: y los gatos :cat:`,
     },
   },
   {
@@ -125,8 +125,7 @@ const checkUserChats = async () => {
   const checkedUsers = await checkUserChats();
 
   Object.values(checkedUsers).forEach((checkedUser) => {
-    console.log('checkedUsers:', checkedUser);
-    users.forEach((user) => {
+    for (const user of users) {
       console.log('iterating user:', user);
       if (!checkedUser.chattedWith.includes(user.id)) {
         console.log(
@@ -138,8 +137,9 @@ const checkUserChats = async () => {
           'U038D7ZQPUY',
           buildChatRecomendationBlocks(user.realName)
         );
+        break;
       }
-    });
+    }
   });
 
   // for (const user of checkedUsers) {
