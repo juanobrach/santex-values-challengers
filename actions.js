@@ -1,54 +1,11 @@
 import { app } from './app.js';
 
-const postMessageToChannel = async (channelId) => {
+const postMessageToChannel = async (channelId, messageBlock) => {
   try {
     // Call the chat.postMessage method using the WebClient
     const result = await app.client.chat.postMessage({
       channel: channelId,
-      blocks: [
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: 'Pick an item from the dropdown list',
-          },
-          accessory: {
-            type: 'static_select',
-            placeholder: {
-              type: 'plain_text',
-              text: 'Select an item',
-              emoji: true,
-            },
-            options: [
-              {
-                text: {
-                  type: 'plain_text',
-                  text: '*this is plain_text text*',
-                  emoji: true,
-                },
-                value: 'value-0',
-              },
-              {
-                text: {
-                  type: 'plain_text',
-                  text: '*this is plain_text text*',
-                  emoji: true,
-                },
-                value: 'value-1',
-              },
-              {
-                text: {
-                  type: 'plain_text',
-                  text: '*this is plain_text text*',
-                  emoji: true,
-                },
-                value: 'value-2',
-              },
-            ],
-            action_id: 'static_select-action',
-          },
-        },
-      ],
+      blocks: messageBlock,
     });
 
     console.log(result);
